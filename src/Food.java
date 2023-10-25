@@ -51,7 +51,7 @@ public class Food {
     public boolean is404020() {
         return percentWithinMargin(getProteinCalories(), totalCalories, 0.4, .1)
         && percentWithinMargin(getCarbCalories(), totalCalories, 0.4, .1)
-        && percentWithinMargin(getFatCalories(), totalCalories, 0.4, .1);
+        && percentWithinMargin(getFatCalories(), totalCalories, 0.2, .1);
     }
 
     public double getCaloriesPerServing() { return (double)totalCalories / servings; }
