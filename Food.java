@@ -44,7 +44,20 @@ public class Food {
         return proteinsToCalories(proteins) + carbsToCalories(carbs) + fatsToCalories(fats);
     }
 
+    private boolean percentWithinMargin(double part, double whole, double goalDecimal, double marginDecimal) {
+        return Math.abs((part/whole)-goalDecimal) <= marginDecimal;
+    }
+
+    public boolean is404020() {
+        return percentWithinMargin(getProteinCalories(), totalCalories, 0.4, .1)
+        && percentWithinMargin(getCarbCalories(), totalCalories, 0.4, .1)
+        && percentWithinMargin(getFatCalories(), totalCalories, 0.4, .1);
+    }
+
     public double getCaloriesPerServing() { return (double)totalCalories / servings; }
+    public int getProteinCalories() { return proteinsToCalories(proteins); }
+    public int getCarbCalories() { return carbsToCalories(carbs); }
+    public int getFatCalories() { return fatsToCalories(fats); }
 
     private int proteinsToCalories(int proteins) { return proteins * 4; }
     private int carbsToCalories(int carbs) { return carbs * 4; }
