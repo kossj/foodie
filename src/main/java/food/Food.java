@@ -1,6 +1,7 @@
 package main.java.food;
+
 public class Food {
-    private String name;
+    private String name, foodType;
     private int proteins, carbs, fats, caloriesPerServing;
     private double servings;
 
@@ -19,11 +20,12 @@ public class Food {
         this.carbs = carbs;
         this.fats = fats;
         this.caloriesPerServing = caloriesPerServing;
-        this.servings = 1;
+        this.servings = calculateCalories(proteins, carbs, fats) / (double) caloriesPerServing;
     }
 
-    public Food(String name, int proteins, int carbs, int fats) {
+    public Food(String name, String foodType, int proteins, int carbs, int fats) {
         this.name = name;
+        this.foodType = foodType;
         this.proteins = proteins;
         this.carbs = carbs;
         this.fats = fats;
@@ -37,7 +39,9 @@ public class Food {
                 + "\t- Servings: " + servings + "\n"
                 + "\t- Proteins " + proteins + "g\n"
                 + "\t- Carbs " + carbs + "g\n"
-                + "\t- Fats " + fats + "g\n";
+                + "\t- Fats " + fats + "g\n"
+                + "\t- Lean: " + is404020() + "\n"
+                + "\t- " + getPercentString() + "\n";
     }
 
 
@@ -51,10 +55,6 @@ public class Food {
                 && isPercentOf(getFatCalories(), getTotalCalories(), 0.1);
     }
 
-    public boolean isLean() {
-        return 
-    }
-
     public double getTotalCalories() { return caloriesPerServing * servings; }
 
     private int proteinsToCalories(int proteins) { return proteins * 4; }
@@ -65,18 +65,18 @@ public class Food {
     public int getCarbCalories() { return carbsToCalories(carbs); }
     public int getFatCalories() { return fatsToCalories(fats); }
 
-    public double getProteinPercent() { return roundedPercentString(getProteinPercent(), getTotalCalories()); }
-    public double getCarbPercent() { return roundedPercentString(getCarbPercent(), getTotalCalories()); }
-    public double getFatPercent() { return roundedPercentString(getFatPercent(), getTotalCalories()); }
+    public double getProteinPercent() { return roundedPercent(getProteinCalories() / servings, caloriesPerServing, 2); }
+    public double getCarbPercent() { return roundedPercent(getCarbCalories() / servings, caloriesPerServing, 2); }
+    public double getFatPercent() { return roundedPercent(getFatCalories() / servings, caloriesPerServing, 2); }
 
     public String getPercentString() {
-        return String.format("Ratio: P:%.2f% C:%.2f% F: %.2f%", getProteinPercent(), getCarbPercent(), getFatPercent());
+        return "Ratio P: " + getProteinPercent() + "% C: " + getCarbPercent() + "% F: " + getFatPercent() + "%";
     }
 
     public String getName() { return this.name; }
     public void setName(String name) { this.name = name; }
 
-    private double roundedPercentString(double part, double whole) { return Math.round(part/whole * 100)/100; }
+    private double roundedPercent(double part, double whole, int places) { return Math.round((part/whole * 100) * Math.pow(10, places)) / Math.pow(10, places); }
 
     private boolean isPercentOf(double part, double whole, double expectedDecimal) {
         double maxMarginDecimal = 10;
