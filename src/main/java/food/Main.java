@@ -6,13 +6,19 @@ import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        Scanner pantry = new Scanner(new File("/workspaces/foodie/src/main/java/food/pantry.txt"));
+        Scanner pantry = new Scanner(new File("src/main/java/food/pantry.txt"));
         while (pantry.hasNextLine()) {
-            System.out.println(foodFromDataFormat(pantry.next(), pantry.nextDouble(), pantry.nextInt(), pantry.nextInt(), pantry.nextInt(), pantry.nextInt()).toString());
-        }
-    }
+            String name = pantry.next();
+            double servings = pantry.nextDouble();
+            double caloriesPerServing = pantry.nextDouble();
+            double proteins = pantry.nextDouble();
+            double carbs = pantry.nextDouble();
+            double fats = pantry.nextDouble();
 
-    public static Food foodFromDataFormat(String name, double servings, int caloriesPerServing, int proteins, int carbs, int fats) {
-        return new Food(name, proteins, carbs, fats, caloriesPerServing, servings);
+            Food a = new Food(name, proteins, carbs, fats, caloriesPerServing, servings);
+            System.out.println(a.toString());
+            
     }
 }
+}
+

@@ -43,7 +43,9 @@ public class Food {
         this.servings = 1;
     }
 
+    @Override
     public String toString() {
+        System.out.println("Food toString() called");
         return name + " nutrient values:\n"
                 + "\t- Food Type: " + foodType + "\n"
                 + "\t- Calories: " + caloriesPerServing + " cals\n"
@@ -107,18 +109,16 @@ public class Food {
         return Math.abs((part / whole) - expectedDecimal) <= maxMarginDecimal;
     }
 
-    
-
     public double getProteinPercent() {
-        return roundedPercent(getProteinCalories() / servings, caloriesPerServing, 2);
+        return roundedPercent(getProteinCalories(), caloriesPerServing, 2);
     }
 
     public double getCarbPercent() {
-        return roundedPercent(getCarbCalories() / servings, caloriesPerServing, 2);
+        return roundedPercent(getCarbCalories(), caloriesPerServing, 2);
     }
 
     public double getFatPercent() {
-        return roundedPercent(getFatCalories() / servings, caloriesPerServing, 2);
+        return roundedPercent(getFatCalories(), caloriesPerServing, 2);
     }
 
     public String getPercentString() {
