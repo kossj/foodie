@@ -97,4 +97,54 @@ public class Food {
 
         return Math.abs((part/whole) - expectedDecimal) <= maxMarginDecimal;
     }
+
+    public String getFoodType() {
+        return foodType;
+    }
+
+    public void setFoodType(String foodType) {
+        this.foodType = foodType;
+    }
+
+    public int getProteins() {
+        return proteins;
+    }
+
+    public void setProteins(int proteins) {
+        this.proteins = proteins;
+    }
+
+    public int getCarbs() {
+        return carbs;
+    }
+
+    public void setCarbs(int carbs) {
+        this.carbs = carbs;
+    }
+
+    public int getFats() {
+        return fats;
+    }
+
+    public void setFats(int fats) {
+        this.fats = fats;
+    }
+
+    public int getCaloriesPerServing() {
+        return caloriesPerServing;
+    }
+
+    public void setCaloriesPerServing(int caloriesPerServing) {
+        this.caloriesPerServing = caloriesPerServing;
+    }
+
+    public double getServings() {
+        return servings;
+    }
+
+    public void setServings(double servings) {
+        this.servings = servings;
+    }
+
+    
 }
