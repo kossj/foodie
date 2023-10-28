@@ -2,10 +2,11 @@ package main.java.food;
 
 public class Food {
     private String name, foodType;
-    private int proteins, carbs, fats, caloriesPerServing;
+    private double proteins, carbs, fats;
+    private double caloriesPerServing; // Changed to double
     private double servings;
 
-    public Food(String name, int proteins, int carbs, int fats, int caloriesPerServing, double servings) {
+    public Food(String name, double proteins, double carbs, double fats, double caloriesPerServing, double servings) {
         this.name = name;
         this.proteins = proteins;
         this.carbs = carbs;
@@ -14,16 +15,16 @@ public class Food {
         this.servings = servings;
     }
 
-    public Food(String name, int proteins, int carbs, int fats, int caloriesPerServing) {
+    public Food(String name, double proteins, double carbs, double fats, double caloriesPerServing) {
         this.name = name;
         this.proteins = proteins;
         this.carbs = carbs;
         this.fats = fats;
         this.caloriesPerServing = caloriesPerServing;
-        this.servings = calculateCalories(proteins, carbs, fats) / (double) caloriesPerServing;
+        this.servings = calculateCalories(proteins, carbs, fats) / caloriesPerServing;
     }
 
-    public Food(String name, String foodType, int proteins, int carbs, int fats) {
+    public Food(String name, String foodType, double proteins, double carbs, double fats) {
         this.name = name;
         this.foodType = foodType;
         this.proteins = proteins;
@@ -33,7 +34,7 @@ public class Food {
         this.servings = 1;
     }
 
-    public Food(String name, int proteins, int carbs, int fats) {
+    public Food(String name, double proteins, double carbs, double fats) {
         this.name = name;
         this.proteins = proteins;
         this.carbs = carbs;
@@ -45,7 +46,7 @@ public class Food {
     public String toString() {
         return name + " nutrient values:\n"
                 + "\t- Food Type: " + foodType + "\n"
-                + "\t- Calories: " + caloriesPerServing +" cals\n"
+                + "\t- Calories: " + caloriesPerServing + " cals\n"
                 + "\t- Servings: " + servings + "\n"
                 + "\t- Proteins " + proteins + "g\n"
                 + "\t- Carbs " + carbs + "g\n"
@@ -54,8 +55,7 @@ public class Food {
                 + "\t- " + getPercentString() + "\n";
     }
 
-
-    private int calculateCalories(int proteins, int carbs, int fats) {
+    private double calculateCalories(double proteins, double carbs, double fats) {
         return proteinsToCalories(proteins) + carbsToCalories(carbs) + fatsToCalories(fats);
     }
 
@@ -69,33 +69,68 @@ public class Food {
         return getProteinCalories() / getTotalCalories() > 0.6;
     }
 
-    public double getTotalCalories() { return caloriesPerServing * servings; }
-
-    private int proteinsToCalories(int proteins) { return proteins * 4; }
-    private int carbsToCalories(int carbs) { return carbs * 4; }
-    private int fatsToCalories(int fats) { return fats * 9; }
-
-    public int getProteinCalories() { return proteinsToCalories(proteins); }
-    public int getCarbCalories() { return carbsToCalories(carbs); }
-    public int getFatCalories() { return fatsToCalories(fats); }
-
-    public double getProteinPercent() { return roundedPercent(getProteinCalories() / servings, caloriesPerServing, 2); }
-    public double getCarbPercent() { return roundedPercent(getCarbCalories() / servings, caloriesPerServing, 2); }
-    public double getFatPercent() { return roundedPercent(getFatCalories() / servings, caloriesPerServing, 2); }
-
-    public String getPercentString() {
-        return "Ratio P: " + getProteinPercent() + "% C: " + getCarbPercent() + "% F: " + getFatPercent() + "%";
+    public double getTotalCalories() {
+        return caloriesPerServing * servings;
     }
 
-    public String getName() { return this.name; }
-    public void setName(String name) { this.name = name; }
+    private double proteinsToCalories(double proteins) {
+        return proteins * 4;
+    }
 
-    private double roundedPercent(double part, double whole, int places) { return Math.round((part/whole * 100) * Math.pow(10, places)) / Math.pow(10, places); }
+    private double carbsToCalories(double carbs) {
+        return carbs * 4;
+    }
 
+    private double fatsToCalories(double fats) {
+        return fats * 9;
+    }
+
+    public double getProteinCalories() {
+        return proteinsToCalories(proteins);
+    }
+
+    public double getCarbCalories() {
+        return carbsToCalories(carbs);
+    }
+
+    public double getFatCalories() {
+        return fatsToCalories(fats);
+    }
+
+    private double roundedPercent(double part, double whole, int places) {
+        return Math.round((part / whole * 100) * Math.pow(10, places)) / Math.pow(10, places);
+    }
+    
     private boolean isPercentOf(double part, double whole, double expectedDecimal) {
-        double maxMarginDecimal = 10;
+        double maxMarginDecimal = 0.10; // Adjusted the margin to 0.10
 
-        return Math.abs((part/whole) - expectedDecimal) <= maxMarginDecimal;
+        return Math.abs((part / whole) - expectedDecimal) <= maxMarginDecimal;
+    }
+
+    
+
+    public double getProteinPercent() {
+        return roundedPercent(getProteinCalories() / servings, caloriesPerServing, 2);
+    }
+
+    public double getCarbPercent() {
+        return roundedPercent(getCarbCalories() / servings, caloriesPerServing, 2);
+    }
+
+    public double getFatPercent() {
+        return roundedPercent(getFatCalories() / servings, caloriesPerServing, 2);
+    }
+
+    public String getPercentString() {
+        return "Ratio: P: " + getProteinPercent() + "% C: " + getCarbPercent() + "% F: " + getFatPercent() + "%";
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getFoodType() {
@@ -106,38 +141,38 @@ public class Food {
         this.foodType = foodType;
     }
 
-    public int getProteins() {
+    public double getProteins() {
         return proteins;
     }
 
-    public void setProteins(int proteins) {
+    public void setProteins(double proteins) {
         this.proteins = proteins;
         this.caloriesPerServing = calculateCalories(proteins, carbs, fats);
     }
 
-    public int getCarbs() {
+    public double getCarbs() {
         return carbs;
     }
 
-    public void setCarbs(int carbs) {
+    public void setCarbs(double carbs) {
         this.carbs = carbs;
         this.caloriesPerServing = calculateCalories(proteins, carbs, fats);
     }
 
-    public int getFats() {
+    public double getFats() {
         return fats;
     }
 
-    public void setFats(int fats) {
+    public void setFats(double fats) {
         this.fats = fats;
         this.caloriesPerServing = calculateCalories(proteins, carbs, fats);
     }
 
-    public int getCaloriesPerServing() {
+    public double getCaloriesPerServing() {
         return caloriesPerServing;
     }
 
-    public void setCaloriesPerServing(int caloriesPerServing) {
+    public void setCaloriesPerServing(double caloriesPerServing) {
         this.caloriesPerServing = caloriesPerServing;
     }
 
@@ -148,6 +183,4 @@ public class Food {
     public void setServings(double servings) {
         this.servings = servings;
     }
-
-    
 }

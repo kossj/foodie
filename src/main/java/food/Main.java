@@ -1,12 +1,18 @@
 package main.java.food;
 
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+
 public class Main {
-    public static void main(String[] args) {
-        Food a = new Food("Olive_Oil", "oil", 0, 0, 14);
+    public static void main(String[] args) throws FileNotFoundException {
+        Scanner pantry = new Scanner(new File("/workspaces/foodie/src/main/java/food/pantry.txt"));
+        while (pantry.hasNextLine()) {
+            System.out.println(foodFromDataFormat(pantry.next(), pantry.nextDouble(), pantry.nextInt(), pantry.nextInt(), pantry.nextInt(), pantry.nextInt()).toString());
+        }
+    }
 
-        System.out.println(a.toString());
-
-        Food b = new Food("Chicken_Breast", "poultry", 76, 1, 17);
-        System.out.println(b.toString());
+    public static Food foodFromDataFormat(String name, double servings, int caloriesPerServing, int proteins, int carbs, int fats) {
+        return new Food(name, proteins, carbs, fats, caloriesPerServing, servings);
     }
 }
