@@ -112,6 +112,7 @@ public class Food {
 
     public void setProteins(int proteins) {
         this.proteins = proteins;
+        this.caloriesPerServing = calculateCalories(proteins, carbs, fats);
     }
 
     public int getCarbs() {
@@ -120,6 +121,7 @@ public class Food {
 
     public void setCarbs(int carbs) {
         this.carbs = carbs;
+        this.caloriesPerServing = calculateCalories(proteins, carbs, fats);
     }
 
     public int getFats() {
@@ -128,6 +130,7 @@ public class Food {
 
     public void setFats(int fats) {
         this.fats = fats;
+        this.caloriesPerServing = calculateCalories(proteins, carbs, fats);
     }
 
     public int getCaloriesPerServing() {
