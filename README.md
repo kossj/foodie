@@ -1,4 +1,3 @@
 # foodie :)
 
-This is a calorie tracker and analyzer, created for a school project.
-The requirements are linked [here]("The Food Class.pdf")
+This is a calorie tracker and analyzer, created for a school project. Info found in "The Food Clas.pdf".

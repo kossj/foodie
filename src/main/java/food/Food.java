@@ -33,14 +33,24 @@ public class Food {
         this.servings = 1;
     }
 
+    public Food(String name, int proteins, int carbs, int fats) {
+        this.name = name;
+        this.proteins = proteins;
+        this.carbs = carbs;
+        this.fats = fats;
+        this.caloriesPerServing = calculateCalories(proteins, carbs, fats);
+        this.servings = 1;
+    }
+
     public String toString() {
         return name + " nutrient values:\n"
+                + "\t- Food Type: " + foodType + "\n"
                 + "\t- Calories: " + caloriesPerServing +" cals\n"
                 + "\t- Servings: " + servings + "\n"
                 + "\t- Proteins " + proteins + "g\n"
                 + "\t- Carbs " + carbs + "g\n"
                 + "\t- Fats " + fats + "g\n"
-                + "\t- Lean: " + is404020() + "\n"
+                + "\t- Lean: " + isLean() + "\n"
                 + "\t- " + getPercentString() + "\n";
     }
 
@@ -53,6 +63,10 @@ public class Food {
         return isPercentOf(getProteinCalories(), getTotalCalories(), 0.4)
                 && isPercentOf(getCarbCalories(), getTotalCalories(), 0.4)
                 && isPercentOf(getFatCalories(), getTotalCalories(), 0.1);
+    }
+
+    public boolean isLean() {
+        return getProteinCalories() / getTotalCalories() > 0.6;
     }
 
     public double getTotalCalories() { return caloriesPerServing * servings; }
