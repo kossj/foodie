@@ -125,6 +125,14 @@ public class Food {
         return "Ratio: P: " + getProteinPercent() + "% C: " + getCarbPercent() + "% F: " + getFatPercent() + "%";
     }
 
+    public String getMacrosString() {
+        return String.format("%s %.2f %.2f %.2f %.2f %.2f", name, servings, caloriesPerServing, proteins, carbs, fats);
+    }
+
+    public String getPercentLeanString() {
+        return "P: " + getProteinPercent() + "% C: " + getCarbPercent() + "% F: " + getFatPercent() + "% " + isLean();
+    }
+
     public String getName() {
         return this.name;
     }
