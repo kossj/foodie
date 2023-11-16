@@ -1,0 +1,10 @@
+Pasta 2 200 7 42 1
+CannedTomatoes 1 35 1 7 0
+CannedTuna 1 120 26 0 1
+RamenNoodles 1 190 4 26 7
+PeanutButter 2 190 14 8 16
+Jelly 2 120 0 31 0
+Cereal 1 120 2 26 1
+CannedSoup 1 120 3 20 4
+RiceCakes 2 70 2 14 0.5
+CannedCorn 1 60 2 14 0.5
