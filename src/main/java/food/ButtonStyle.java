@@ -14,11 +14,11 @@ public class ButtonStyle {
         this.text = text;
     }
 
-    public JButton getButtonFromStyle(ButtonStyle style) {
+    public JButton getButtonFromStyle(String text) {
         JButton ret = new JButton();
         ret.setForeground(foregroundColor);
         ret.setFont(font);
-        ret.setLabel(text);
+        ret.setText(text);
         return ret;
     }
 }

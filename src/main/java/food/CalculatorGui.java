@@ -18,16 +18,15 @@ import java.awt.event.KeyEvent;
  *   images/left.gif
  */
 public class CalculatorGui extends JPanel {
-    protected JButton b1, b2, b3;
+    protected JButton b1, b2, b3, name;
 
     public CalculatorGui() {
         b1 = new JButton("Disable middle button");
-        b1.setVerticalTextPosition(AbstractButton.CENTER);
-        b1.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
-        b1.setMnemonic(KeyEvent.VK_D);
-        b1.setActionCommand("disable");
 
         ButtonStyle rightButtons = new ButtonStyle(Color.BLACK, new Font("TimesRoman", Font.BOLD | Font.ITALIC, 20), "", null);
+        JButton name = rightButtons.getButtonFromStyle("name");
+
+        add(name);
     }
 
     private static void createAndShowGUI() {
@@ -38,6 +37,7 @@ public class CalculatorGui extends JPanel {
 
         //Create and set up the content pane.
         CalculatorGui newContentPane = new CalculatorGui();
+
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
 
