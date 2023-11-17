@@ -1,15 +1,10 @@
 package main.java.food;
 
-import javax.swing.AbstractButton;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JFrame;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
 /*
  * ButtonDemo.java requires the following files:
@@ -17,15 +12,24 @@ import java.awt.event.KeyEvent;
  *   images/middle.gif
  *   images/left.gif
  */
-public class CalculatorGui extends JPanel {
-    protected JButton b1, b2, b3, name;
+public class CalculatorGui extends JPanel implements ActionListener {
+    protected JButton b1, b2, b3, calculate;
+    protected ButtonStyle calculateButtons;
+
+    protected JTextField name, proteins, carbs, fats;
+    protected TextStyle rightText;
 
     public CalculatorGui() {
-        b1 = new JButton("Disable middle button");
+        calculateButtons = new ButtonStyle(Color.BLACK, new Font("TimesRoman", Font.BOLD | Font.ITALIC, 20), "", null);
+        rightText = new TextStyle(Color.BLACK, new Font("TimesRoman", Font.BOLD | Font.ITALIC, 20), "", null);
 
-        ButtonStyle rightButtons = new ButtonStyle(Color.BLACK, new Font("TimesRoman", Font.BOLD | Font.ITALIC, 20), "", null);
-        JButton name = rightButtons.getButtonFromStyle("name");
+        calculate = calculateButtons.getButtonFromStyle("calculate");
+        calculate.setActionCommand("calculate");
+        calculate.addActionListener(this);
 
+        add(calculate);
+
+        name = rightText.getTextFieldFromStyle("name");
         add(name);
     }
 
@@ -39,11 +43,23 @@ public class CalculatorGui extends JPanel {
         CalculatorGui newContentPane = new CalculatorGui();
 
         newContentPane.setOpaque(true); //content panes must be opaque
+        newContentPane.setLayout(new BoxLayout(newContentPane, BoxLayout.Y_AXIS));
         frame.setContentPane(newContentPane);
 
         //Display the window.
         frame.pack();
         frame.setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if ("calculate".equals(e.getActionCommand())) {
+            Food a = new Food("Hamburger", 10, 10, 10, 10);
+            System.out.println(a.toString());
+        } else {
+            b2.setEnabled(true);
+            b1.setEnabled(true);
+            b3.setEnabled(false);
+        }
     }
 
     public static void main(String[] args) {
