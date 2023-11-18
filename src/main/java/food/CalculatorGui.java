@@ -16,17 +16,19 @@ public class CalculatorGui extends JPanel implements ActionListener {
     protected JComboBox<String> type;
 
     public CalculatorGui() {
-        calculateButtons = new ButtonStyle(Color.BLACK, new Font("TimesRoman", Font.BOLD | Font.ITALIC, 20), "Calculate", null);
-        rightText = new TextStyle(Color.BLACK, new Font("TimesRoman", Font.BOLD | Font.ITALIC, 20), "", null);
-        labelStyle = new LabelStyle(Color.BLACK, new Font("TimesRoman", Font.BOLD | Font.ITALIC, 20), "", null);
-        comboStyle = new ComboStyle(Color.BLACK, new Font("TimesRoman", Font.BOLD | Font.ITALIC, 20), "", null);
+        calculateButtons = new ButtonStyle(Color.WHITE, new Font("TimesRoman", Font.BOLD | Font.ITALIC, 20), "Calculate", null);
+        rightText = new TextStyle(Color.BLUE, new Font("TimesRoman", Font.BOLD | Font.ITALIC, 20), "", null);
+        labelStyle = new LabelStyle(Color.BLUE, new Font("TimesRoman", Font.BOLD | Font.ITALIC, 20), "", null);
+        comboStyle = new ComboStyle(Color.BLUE, new Font("TimesRoman", Font.BOLD | Font.ITALIC, 20), "", null);
 
         setLayout(new BorderLayout());
+        setBackground(new Color(173, 216, 230)); // Light Blue Background
 
         JPanel titlePanel = createTitlePanel();
         add(titlePanel, BorderLayout.NORTH);
 
         JPanel contentPanel = new JPanel(new BorderLayout());
+        contentPanel.setBackground(new Color(173, 216, 230));
 
         JPanel topPanel = createLabelPanel();
         contentPanel.add(topPanel, BorderLayout.CENTER);
@@ -42,9 +44,11 @@ public class CalculatorGui extends JPanel implements ActionListener {
 
     private JPanel createTitlePanel() {
         JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        titlePanel.setBackground(new Color(70, 130, 180)); // Steel Blue
 
         JLabel titleLabel = new JLabel("Nutrition Calculator");
         titleLabel.setFont(new Font("TimesRoman", Font.BOLD | Font.ITALIC, 35));
+        titleLabel.setForeground(Color.WHITE);
         titlePanel.add(titleLabel);
 
         ImageIcon icon = new ImageIcon("assets/yippee.png");  // Replace with the path to your icon
@@ -57,6 +61,7 @@ public class CalculatorGui extends JPanel implements ActionListener {
     private JPanel createRightDataPanel() {
         JPanel dataPanel = new JPanel();
         dataPanel.setLayout(new BoxLayout(dataPanel, BoxLayout.Y_AXIS));
+        dataPanel.setBackground(new Color(173, 216, 230));
 
         // Adding buttons to the panel
         name = rightText.getTextFieldFromStyle("name");
@@ -89,9 +94,11 @@ public class CalculatorGui extends JPanel implements ActionListener {
 
     private JPanel createLabelPanel() {
         JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        labelPanel.setBackground(new Color(173, 216, 230));
 
         // Adding label to the panel
         result = labelStyle.getLabelFromStyle("Enter information about your food!");
+        result.setForeground(Color.WHITE);
         labelPanel.add(result);
 
         return labelPanel;
@@ -99,6 +106,7 @@ public class CalculatorGui extends JPanel implements ActionListener {
 
     private JPanel createCalculateButtonPanel() {
         JPanel calculateButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        calculateButtonPanel.setBackground(new Color(70, 130, 180)); // Steel Blue
 
         // Creating the calculate button
         calculate = new JButton("Calculate");
@@ -107,15 +115,14 @@ public class CalculatorGui extends JPanel implements ActionListener {
 
         // Customizing the button appearance
         calculate.setFont(new Font("TimesRoman", Font.BOLD | Font.ITALIC, 20));
-        calculate.setBackground(Color.BLUE); // Set your desired background color
-        calculate.setForeground(Color.WHITE); // Set your desired text color
-        calculate.setPreferredSize(new Dimension(200, 40)); // Set your desired size
+        calculate.setBackground(Color.WHITE);
+        calculate.setForeground(new Color(70, 130, 180)); // Steel Blue
+        calculate.setPreferredSize(new Dimension(200, 40));
 
         calculateButtonPanel.add(calculate);
 
         return calculateButtonPanel;
     }
-
 
     public void actionPerformed(ActionEvent e) {
         if ("calculate".equals(e.getActionCommand())) {
@@ -137,9 +144,6 @@ public class CalculatorGui extends JPanel implements ActionListener {
         frame.setPreferredSize(new Dimension(550, 500));
 
         CalculatorGui calculatorPane = new CalculatorGui();
-        calculatorPane.setOpaque(true);
-        calculatorPane.setBackground(Color.blue);
-
         frame.setContentPane(calculatorPane);
 
         frame.pack();
