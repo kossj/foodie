@@ -13,7 +13,7 @@ public class CalculatorGui extends JPanel implements ActionListener {
     protected LabelStyle labelStyle;
     protected ComboStyle comboStyle;
     protected JTextField name, proteins, carbs, fats;
-    protected JComboBox type;
+    protected JComboBox<String> type;
 
     public CalculatorGui() {
         calculateButtons = new ButtonStyle(Color.BLACK, new Font("TimesRoman", Font.BOLD | Font.ITALIC, 20), "Calculate", null);
@@ -21,20 +21,37 @@ public class CalculatorGui extends JPanel implements ActionListener {
         labelStyle = new LabelStyle(Color.BLACK, new Font("TimesRoman", Font.BOLD | Font.ITALIC, 20), "", null);
         comboStyle = new ComboStyle(Color.BLACK, new Font("TimesRoman", Font.BOLD | Font.ITALIC, 20), "", null);
 
-
         setLayout(new BorderLayout());
 
-        // Buttons on the right stacked vertically using BoxLayout
-        JPanel buttonPanel = createRightDataPanel();
-        add(buttonPanel, BorderLayout.EAST);
+        JPanel titlePanel = createTitlePanel();
+        add(titlePanel, BorderLayout.NORTH);
 
-        // Large label on the left using GridLayout
-        JPanel labelPanel = createLabelPanel();
-        add(labelPanel, BorderLayout.WEST);
+        JPanel contentPanel = new JPanel(new BorderLayout());
 
-        // Calculate button at the bottom using FlowLayout
+        JPanel topPanel = createLabelPanel();
+        contentPanel.add(topPanel, BorderLayout.CENTER);
+
+        JPanel dataPanel = createRightDataPanel();
+        contentPanel.add(dataPanel, BorderLayout.EAST);
+
+        add(contentPanel, BorderLayout.CENTER);
+
         JPanel calculateButtonPanel = createCalculateButtonPanel();
         add(calculateButtonPanel, BorderLayout.SOUTH);
+    }
+
+    private JPanel createTitlePanel() {
+        JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+        JLabel titleLabel = new JLabel("Nutrition Calculator");
+        titleLabel.setFont(new Font("TimesRoman", Font.BOLD | Font.ITALIC, 35));
+        titlePanel.add(titleLabel);
+
+        ImageIcon icon = new ImageIcon("assets/yippee.png");  // Replace with the path to your icon
+        JLabel iconLabel = new JLabel(icon);
+        titlePanel.add(iconLabel);
+
+        return titlePanel;
     }
 
     private JPanel createRightDataPanel() {
@@ -61,11 +78,10 @@ public class CalculatorGui extends JPanel implements ActionListener {
     }
 
     private JPanel createLabelPanel() {
-        JPanel labelPanel = new JPanel(new GridLayout(1, 1));
+        JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         // Adding label to the panel
-
-        result = labelStyle.getLabelFromStyle("label");
+        result = labelStyle.getLabelFromStyle("Enter information about your food!");
         labelPanel.add(result);
 
         return labelPanel;
@@ -85,14 +101,22 @@ public class CalculatorGui extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if ("calculate".equals(e.getActionCommand())) {
-            Food a = new Food("Hamburger", 10, 10, 10, 10);
-            result.setText("<html>" + a.toGUIString().replace("\n","<br/>") + "</html>");
+            String name = this.name.getText();
+            String type = (String)this.type.getSelectedItem();
+            double proteins = Double.parseDouble(this.proteins.getText());
+            double carbs = Double.parseDouble(this.carbs.getText());
+            double fats = Double.parseDouble(this.fats.getText());
+
+            Food a = new Food(name, proteins, carbs, fats);
+            a.setFoodType(type);
+            result.setText("<html>" + a.toGUIString().replace("\n", "<br/>") + "</html>");
         }
     }
 
     private static void createAndShowGUI() {
         JFrame frame = new JFrame("Calculator GUI");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(550, 500));
 
         CalculatorGui calculatorPane = new CalculatorGui();
         calculatorPane.setOpaque(true);

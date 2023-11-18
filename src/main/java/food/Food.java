@@ -65,7 +65,7 @@ public class Food {
                 + "\t- Carbs " + carbs + "g\n"
                 + "\t- Fats " + fats + "g\n"
                 + "\t- Ratio:\n"
-                + "\t- " + getPercentString() + "\n"
+                + "\t- " + getGUIPercentString() + "\n"
                 + "\t- The food is " + (isLean() ? "" : "not ") + "lean!";
     }
 
@@ -135,6 +135,10 @@ public class Food {
 
     public String getPercentString() {
         return "Ratio: P: " + getProteinPercent() + "% C: " + getCarbPercent() + "% F: " + getFatPercent() + "%";
+    }
+
+    public String getGUIPercentString() {
+        return getProteinPercent() + "% C: " + getCarbPercent() + "% F: " + getFatPercent() + "%";
     }
 
     public String getMacrosString() {
