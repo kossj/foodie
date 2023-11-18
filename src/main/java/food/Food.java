@@ -45,7 +45,6 @@ public class Food {
 
     @Override
     public String toString() {
-        System.out.println("Food toString() called");
         return name + " nutrient values:\n"
                 + "\t- Food Type: " + foodType + "\n"
                 + "\t- Calories: " + caloriesPerServing + " cals\n"
@@ -55,6 +54,19 @@ public class Food {
                 + "\t- Fats " + fats + "g\n"
                 + "\t- Lean: " + isLean() + "\n"
                 + "\t- " + getPercentString() + "\n";
+    }
+
+    public String toGUIString() {
+        return name + " nutrient values:\n"
+                + "\t- Food Type: " + foodType + "\n"
+                + "\t- Calories: " + caloriesPerServing + " cals\n"
+                + "\t- Servings: " + servings + "\n"
+                + "\t- Proteins " + proteins + "g\n"
+                + "\t- Carbs " + carbs + "g\n"
+                + "\t- Fats " + fats + "g\n"
+                + "\t- Ratio:\n"
+                + "\t- " + getPercentString() + "\n"
+                + "\t- The food is " + (isLean() ? "" : "not ") + "lean!";
     }
 
     private double calculateCalories(double proteins, double carbs, double fats) {
