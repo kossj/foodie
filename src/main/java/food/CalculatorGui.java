@@ -44,14 +44,14 @@ public class CalculatorGui extends JPanel implements ActionListener {
 
     private JPanel createTitlePanel() {
         JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        titlePanel.setBackground(new Color(70, 130, 180)); // Steel Blue
+        titlePanel.setBackground(new Color(70, 130, 180));
 
         JLabel titleLabel = new JLabel("Nutrition Calculator");
         titleLabel.setFont(new Font("TimesRoman", Font.BOLD | Font.ITALIC, 35));
         titleLabel.setForeground(Color.WHITE);
         titlePanel.add(titleLabel);
 
-        ImageIcon icon = new ImageIcon("assets/yippee.png");  // Replace with the path to your icon
+        ImageIcon icon = new ImageIcon("assets/yippee.png");
         JLabel iconLabel = new JLabel(icon);
         titlePanel.add(iconLabel);
 
@@ -63,7 +63,6 @@ public class CalculatorGui extends JPanel implements ActionListener {
         dataPanel.setLayout(new BoxLayout(dataPanel, BoxLayout.Y_AXIS));
         dataPanel.setBackground(new Color(173, 216, 230));
 
-        // Adding buttons to the panel
         name = rightText.getTextFieldFromStyle("name");
         dataPanel.add(name);
 
@@ -77,13 +76,11 @@ public class CalculatorGui extends JPanel implements ActionListener {
         proteins = rightText.getTextFieldFromStyle("proteins");
         dataPanel.add(proteins);
 
-        // Add an empty label for vertical spacing
         dataPanel.add(Box.createRigidArea(new Dimension(0, 5)));
 
         carbs = rightText.getTextFieldFromStyle("carbs");
         dataPanel.add(carbs);
 
-        // Add another empty label for vertical spacing
         dataPanel.add(Box.createRigidArea(new Dimension(0, 5)));
 
         fats = rightText.getTextFieldFromStyle("fats");
@@ -96,7 +93,6 @@ public class CalculatorGui extends JPanel implements ActionListener {
         JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         labelPanel.setBackground(new Color(173, 216, 230));
 
-        // Adding label to the panel
         result = labelStyle.getLabelFromStyle("Enter information about your food!");
         result.setForeground(Color.WHITE);
         labelPanel.add(result);
@@ -108,12 +104,10 @@ public class CalculatorGui extends JPanel implements ActionListener {
         JPanel calculateButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         calculateButtonPanel.setBackground(new Color(70, 130, 180)); // Steel Blue
 
-        // Creating the calculate button
         calculate = new JButton("Calculate");
         calculate.setActionCommand("calculate");
         calculate.addActionListener(this);
 
-        // Customizing the button appearance
         calculate.setFont(new Font("TimesRoman", Font.BOLD | Font.ITALIC, 20));
         calculate.setBackground(Color.WHITE);
         calculate.setForeground(new Color(70, 130, 180)); // Steel Blue
