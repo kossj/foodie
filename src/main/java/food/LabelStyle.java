@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class LabelStyle {
-    Color foregroundColor;
+    Color foregroundColor, backgroundColor;
     Font font;
     String text;
 

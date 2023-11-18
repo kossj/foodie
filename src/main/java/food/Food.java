@@ -66,7 +66,7 @@ public class Food {
                 + "\t- Fats " + fats + "g\n"
                 + "\t- Ratio:\n"
                 + "\t- " + getGUIPercentString() + "\n"
-                + "\t- The food is " + (isLean() ? "" : "not ") + "lean!";
+                + "\t- <em>The food is " + (isLean() ? "" : "not ") + "lean!</em>";
     }
 
     private double calculateCalories(double proteins, double carbs, double fats) {

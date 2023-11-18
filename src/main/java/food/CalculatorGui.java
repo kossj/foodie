@@ -62,14 +62,24 @@ public class CalculatorGui extends JPanel implements ActionListener {
         name = rightText.getTextFieldFromStyle("name");
         dataPanel.add(name);
 
-        type = comboStyle.getComboFromStyle(new String[]{"Oil", "Poultry", "Misc"});
+        dataPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+
+        type = comboStyle.getComboFromStyle(new String[]{"Meat", "Fish", "Poultry", "Vegetables", "Fruits", "Dairy", "Grains", "Legumes", "Nuts", "Sweets", "Beverages", "Misc"});
         dataPanel.add(type);
+
+        dataPanel.add(Box.createRigidArea(new Dimension(0, 5)));
 
         proteins = rightText.getTextFieldFromStyle("proteins");
         dataPanel.add(proteins);
 
+        // Add an empty label for vertical spacing
+        dataPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+
         carbs = rightText.getTextFieldFromStyle("carbs");
         dataPanel.add(carbs);
+
+        // Add another empty label for vertical spacing
+        dataPanel.add(Box.createRigidArea(new Dimension(0, 5)));
 
         fats = rightText.getTextFieldFromStyle("fats");
         dataPanel.add(fats);
@@ -90,14 +100,22 @@ public class CalculatorGui extends JPanel implements ActionListener {
     private JPanel createCalculateButtonPanel() {
         JPanel calculateButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
-        // Adding calculate button to the panel
-        calculate = calculateButtons.getButtonFromStyle("calculate");
+        // Creating the calculate button
+        calculate = new JButton("Calculate");
         calculate.setActionCommand("calculate");
         calculate.addActionListener(this);
+
+        // Customizing the button appearance
+        calculate.setFont(new Font("TimesRoman", Font.BOLD | Font.ITALIC, 20));
+        calculate.setBackground(Color.BLUE); // Set your desired background color
+        calculate.setForeground(Color.WHITE); // Set your desired text color
+        calculate.setPreferredSize(new Dimension(200, 40)); // Set your desired size
+
         calculateButtonPanel.add(calculate);
 
         return calculateButtonPanel;
     }
+
 
     public void actionPerformed(ActionEvent e) {
         if ("calculate".equals(e.getActionCommand())) {
@@ -120,6 +138,8 @@ public class CalculatorGui extends JPanel implements ActionListener {
 
         CalculatorGui calculatorPane = new CalculatorGui();
         calculatorPane.setOpaque(true);
+        calculatorPane.setBackground(Color.blue);
+
         frame.setContentPane(calculatorPane);
 
         frame.pack();
